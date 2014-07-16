@@ -1,0 +1,13 @@
+{
+  "name": "boilerplate",
+  "private": true,
+  "dependencies": {
+    "jquery": "*",
+    "modernizr": "*",
+    "underscore": "*",
+    "backbone": "*",
+    "fastclick": "*"
+  },
+  "devDependencies": {},
+  "overrides": {}
+}

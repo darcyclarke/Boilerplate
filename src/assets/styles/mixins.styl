@@ -1,0 +1,44 @@
+//- --------------------------------------------------------
+//- Mixins
+//- --------------------------------------------------------
+
+//- --------------------------------------------------------
+//- Cache MediaQueries
+//- TODO: Fails on "display: block" as "block" is a keyword
+//- --------------------------------------------------------
+
+media($condition)
+  helper($condition)
+    unless $media_cache[$condition]
+      $media_cache[$condition] = ()
+    push($media_cache[$condition], block)
+
+  +helper($condition)
+    {selector() + ''}
+      {block}
+
+//- --------------------------------------------------------
+//- Apply MediaQueries
+//- --------------------------------------------------------
+
+dump_media_cache()
+  for $media, $blocks in $media_cache
+    $media = unquote($media_aliases[$media] || $media)
+    $media = '(%s)' % $media unless match('\(', $media)
+    $media = 'only screen and %s' % $media
+    @media $media
+      for $block in $blocks
+        {$block}
+
+//- --------------------------------------------------------
+//- Media Queries
+//- --------------------------------------------------------
+
+$media_cache = {}
+$media_aliases = {
+  mobile: 'max-width: 750px'
+  tablet: 'max-width: 1024px'
+  desktop: 'max-width: 1300px'
+  retina: '-webkit-min-device-pixel-ratio: 2'
+}
+

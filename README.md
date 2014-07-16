@@ -1,4 +1,2 @@
-Boilerplate
-===========
+# Website Boileplate
 
-My project boilerplate
